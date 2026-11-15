@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vitalarchism</title>
+    <style>
+      :root {
+        --bg: #f1f4ee;
+        --panel: #fffefa;
+        --primary: #557a5b;
+        --primary-dark: #26352d;
+        --accent: #a9c59d;
+        --text: #252b27;
+        --muted: #68736b;
+        --line: rgba(38, 53, 45, 0.16);
+      }
+
+      * { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        text-align: center;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .topbar-inner,
+      nav,
+      .hero,
+      .info-grid,
+      .events,
+      .cta,
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .topbar-inner {
+        min-height: 54px;
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+
+      .topbar-meta {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        font-size: 1.6rem;
+        color: var(--primary-dark);
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-size: 1.4rem;
+      }
+
+      .brand-logo {
+        width: 42px;
+        height: 42px;
+        object-fit: contain;
+      }
+
+      nav {
+        min-height: 88px;
+        justify-content: center;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 26px;
+        font-weight: 600;
+        color: var(--primary-dark);
+        justify-content: center;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .nav-button,
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 999px;
+        background: var(--primary);
+        color: #fff;
+        padding: 0.9rem 1.5rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .nav-button:hover,
+      .btn:hover {
+        background: var(--primary-dark);
+      }
+
+      .hero {
+        padding: 72px 0 56px;
+        background: linear-gradient(135deg, rgba(85, 122, 91, 0.1), rgba(169, 197, 157, 0.18));
+        justify-content: center;
+      }
+
+      .hero-copy,
+      .hero-visual {
+        flex: 1;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        background: rgba(141, 94, 59, 0.1);
+        color: var(--primary-dark);
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        font-size: clamp(2.6rem, 4vw, 4.5rem);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        margin: 18px 0 18px;
+        color: var(--primary-dark);
+      }
+
+      .hero-copy p {
+        font-size: 1.08rem;
+        color: var(--muted);
+        max-width: 580px;
+        margin: 0 auto 28px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 28px;
+        justify-content: center;
+      }
+
+      .btn.alt {
+        background: transparent;
+        color: var(--primary-dark);
+        border: 1px solid rgba(93, 66, 51, 0.25);
+      }
+
+      .hero-stats {
+        display: flex;
+        gap: 32px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.7rem;
+        color: var(--primary-dark);
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .hero-visual {
+        position: relative;
+      }
+
+      .card-image {
+        background: linear-gradient(160deg, rgba(38, 53, 45, 0.98), rgba(85, 122, 91, 0.9));
+        border-radius: 28px;
+        padding: 18px;
+        box-shadow: 0 30px 60px rgba(91, 59, 42, 0.18);
+      }
+
+      .image-box {
+        background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.02)), #e7d6bd;
+        border-radius: 22px;
+        min-height: 420px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .image-box::before,
+      .image-box::after {
+        content: "";
+        position: absolute;
+        inset: auto;
+        border-radius: 50%;
+      }
+
+      .image-box::before {
+        width: 210px;
+        height: 210px;
+        background: rgba(255,255,255,0.26);
+        bottom: 30px;
+        right: 50px;
+      }
+
+      .image-box::after {
+        width: 120px;
+        height: 120px;
+        background: rgba(93, 66, 51, 0.18);
+        bottom: 90px;
+        left: 50px;
+      }
+
+      .floating-note {
+        position: absolute;
+        right: -12px;
+        bottom: 28px;
+        background: #fff;
+        border-radius: 16px;
+        width: 220px;
+        padding: 18px 18px 16px;
+        box-shadow: 0 24px 50px rgba(61, 49, 41, 0.12);
+      }
+
+      .floating-note .label {
+        color: var(--muted);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .floating-note strong {
+        display: block;
+        font-size: 1.3rem;
+        margin-top: 5px;
+        color: var(--primary-dark);
+      }
+
+      .section {
+        padding: 90px 0;
+      }
+
+      .section-header {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 42px;
+      }
+
+      .section-header h2 {
+        font-size: clamp(2rem, 3vw, 3rem);
+        margin: 0 0 12px;
+        color: var(--primary-dark);
+      }
+
+      .section-header p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .info-grid {
+        align-items: stretch;
+      }
+
+      .info-card {
+        flex: 1;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 32px 24px;
+        text-align: center;
+      }
+
+      .info-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 16px;
+        background: rgba(141, 94, 59, 0.12);
+        display: grid;
+        place-items: center;
+        font-size: 1.6rem;
+        color: var(--primary-dark);
+        margin-bottom: 18px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .info-card h3 {
+        margin: 0 0 10px;
+        color: var(--primary-dark);
+        font-size: 1.4rem;
+      }
+
+      .info-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .events {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .program-list,
+      .sermon-box {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 28px;
+      }
+
+      .program-list h3,
+      .sermon-box h3 {
+        margin: 0 0 20px;
+        color: var(--primary-dark);
+        font-size: 1.9rem;
+      }
+
+      .event-item {
+        display: grid;
+        grid-template-columns: 76px 1fr auto;
+        gap: 18px;
+        align-items: center;
+        padding: 18px 0;
+        border-top: 1px solid var(--line);
+        text-align: center;
+      }
+
+      .event-item:first-child {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .event-date {
+        background: rgba(141, 94, 59, 0.1);
+        border-radius: 16px;
+        padding: 12px 10px;
+        text-align: center;
+        color: var(--primary-dark);
+      }
+
+      .event-date strong {
+        display: block;
+        font-size: 1.4rem;
+      }
+
+      .event-item h4 {
+        margin: 0 0 4px;
+        font-size: 1.15rem;
+        color: var(--primary-dark);
+      }
+
+      .event-item p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .event-tag {
+        background: var(--accent);
+        color: var(--primary-dark);
+        border-radius: 999px;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        justify-self: center;
+      }
+
+      .sermon-box {
+        background: linear-gradient(180deg, rgba(38, 53, 45, 0.06), rgba(169, 197, 157, 0.16));
+      }
+
+      .scripture {
+        padding: 22px 20px;
+        background: #fff;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        font-size: 1.25rem;
+        line-height: 1.6;
+        color: var(--primary-dark);
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+
+      .sermon-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin-bottom: 22px;
+      }
+
+      .cta {
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        color: #fff;
+        padding: 40px 24px;
+        border-radius: 26px;
+        margin-top: 10px;
+        justify-content: center;
+      }
+
+      .cta h3 {
+        margin: 0;
+        font-size: clamp(1.8rem, 3vw, 2.7rem);
+      }
+
+      .cta p {
+        margin: 0;
+        color: rgba(255,255,255,0.8);
+      }
+
+      .footer {
+        background: #1d1816;
+        color: rgba(255,255,255,0.8);
+        padding: 28px 0;
+      }
+
+      .footer-inner {
+        min-height: 70px;
+        justify-content: center;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      @media (max-width: 900px) {
+        .topbar-inner,
+        nav,
+        .hero,
+        .cta,
+        .footer-inner {
+          display: block;
+          text-align: center;
+        }
+
+        .nav-links {
+          justify-content: center;
+          flex-wrap: wrap;
+          padding: 12px 0 18px;
+        }
+
+        .brand {
+          justify-content: center;
+          padding-top: 18px;
+        }
+
+        .hero {
+          padding-top: 48px;
+        }
+
+        .hero-actions,
+        .hero-stats {
+          justify-content: center;
+        }
+
+        .info-grid,
+        .events {
+          display: block;
+        }
+
+        .info-card + .info-card,
+        .program-list + .sermon-box {
+          margin-top: 20px;
+        }
+
+        .event-item {
+          grid-template-columns: 64px 1fr;
+        }
+
+        .event-tag {
+          grid-column: 2;
+          justify-self: start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <header class="container">
+      <nav>
+        <div class="brand" aria-label="Vitalarchism home">
+          <img class="brand-logo" src="Vitalarchism_sigil.jpg" alt="Vitalarchism Sigil" />
+          <span>Vitalarchism</span>
+        </div>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#events">Events</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero">
+          <div class="hero-copy">
+            <span class="eyebrow">Kindness • Life • Community</span>
+            <h1>The Vitalarchism Church</h1>
+            <p>
+              We are a welcoming community devoted to worship, prayer, and Living in the cycle of Life.
+            </p>
+            <div class="hero-actions">
+              <a class="btn" href="#contact">Want to Join?</a>
+              <a class="btn alt" href="#about">Learn More</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat">
+                <strong>1+</strong>
+                <span>Years Serving</span>
+              </div>
+              <div class="stat">
+                <strong>1</strong>
+                <span>Worshipper</span>
+              </div>
+              <div class="stat">
+                <strong></strong>
+                <span></span>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="eyebrow">Our Mission</span>
+            <h2>Living out the gospel in everyday life.</h2>
+            <p>
+              We seek to help people know Vita and Nihilion, grow in faith, and help others with love,
+              humility, and practical care.
+            </p>
+          </div>
+
+          <div class="info-grid">
+            <article class="info-card">
+                <div class="info-icon">✦</div>
+              <h3>Worship</h3>
+              <p>
+                Spirit-filled gatherings that inspire prayer, reflection, and heartfelt praise.
+              </p>
+            </article>
+
+            <article class="info-card">
+              <div class="info-icon">❤</div>
+              <h3>Community</h3>
+              <p>
+                A place where families, students, and elders belong, encourage one another, and grow together.
+              </p>
+            </article>
+
+            <article class="info-card">
+              <div class="info-icon">📅</div>
+              <h3>Events</h3>
+              <p>
+                There will be events for all ages, including youth nights, family picnics, and community service projects.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="events" class="section">
+        <div class="container events">
+          <div class="program-list">
+            <h3>Upcoming Gatherings</h3>
+
+            <div class="event-item">
+              <div class="event-date"><strong></strong></div>
+              <div>
+                <h4>None at the moment</h4>
+                <p></p>
+              </div>
+              <div class="event-tag"></div>
+            </div>
+
+          <aside id="sermons" class="sermon-box">
+            <h3>Featured Scripture</h3>
+            <div class="scripture">“May Life's light guide me this day, and may death grant me his kindness.”</div>
+            <div class="sermon-meta">
+
+            </div>
+            <a class="btn" href="#contact">Join Today</a>
+          </aside>
+        </div>
+      </section>
+
+      <section id="services" class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="eyebrow">Ways to Connect</span>
+            <h2>Join our Community.</h2>
+          </div>
+
+          <div class="info-grid">
+            <article class="info-card">
+              <div class="info-icon">☀</div>
+              <h3>General Discussions</h3>
+              <p>
+                Open conversations about faith, life, and the teachings of Vita and Nihilion.
+              </p>
+            </article>
+
+            <article class="info-card">
+              <div class="info-icon">✎</div>
+              <h3>Belief Studies</h3>
+              <p>
+                Weekly study groups exploring the principles of Vitalarchism, scripture, and practical applications in daily life.
+              </p>
+            </article>
+
+            <article class="info-card">
+              <div class="info-icon">❤</div>
+              <h3>Community Outreach</h3>
+              <p>
+                Help the religion grow and help others in need through volunteer work, charity events, and community service.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="container section">
+        <div class="cta">
+          <div>
+            <h3>Come worship with us.</h3>
+            <p>We would love to meet you, and walk with you in faith.</p>
+          </div>
+          <a class="btn alt" href="mailto:hello@gracehaven.org">hello@gracehaven.org</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        2024 &copy; Vitalarchism community.
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#events">Events</a>
+          <a href="#sermons">Sermons</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
